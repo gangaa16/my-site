@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,5 +7,10 @@
 </head>
 <body>
     <h1 style="color:darkred ;">Hello myapp</h1>
+    <ol>
+    {% for n in names%}
+    <h1 style="color:darkblue;">{{n}}</h1>
+    {%endfor%}
+    </ol>
 </body>
-</html>
+</html> 
