@@ -14,4 +14,4 @@ class Product(models.Model):
     price = models.FloatField()
     description = models.CharField(max_length=200)
     image = models.ImageField(blank=True,upload_to ='images')
-    seller_name = models.ForeignKey(User,on_delete=models.CASCADE,default=4)
+    seller_name = models.ForeignKey(User,on_delete=models.CASCADE)
