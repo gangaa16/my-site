@@ -28,6 +28,10 @@ SECRET_KEY = 'django-insecure-^%qg#@8f0^fx-3&(frs4nto+g1scgz%+4k@&psf3$+-wmn@xn0
 DEBUG = True
 
 ALLOWED_HOSTS = ['mysite.com','localhost','127.0.0.1']
+INTERNAL_IPS = [
+    "127.0.0.1",
+    "localhost",
+]
 
 
 # Application definition
@@ -40,6 +44,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapp',
+    'users',
+    'tailwind',
+    'theme',
+    'django_browser_reload',
+    
 ]
 
 MIDDLEWARE = [
@@ -50,7 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]   
 
 ROOT_URLCONF = 'mysite.urls'
@@ -89,18 +98,7 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    
 ]
 
 
@@ -127,3 +125,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR ,'media/')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+TAILWIND_APP_NAME = 'theme'
+
+NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+
+
+LOGIN_REDIRECT_URL = 'myapp:products'
+LOGIN_URL = "users:login"
