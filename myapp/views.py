@@ -6,8 +6,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseServerError
 from django.shortcuts import render,redirect
 from django.urls import reverse_lazy
-from myapp.models import Product
+from myapp.models import Cart, Product
 from django.db.models import Q 
+
 from django.views.generic import ListView,TemplateView,DeleteView,CreateView,DetailView,UpdateView
 
 # Create your views here.
@@ -88,6 +89,7 @@ class ProductUpdateView(UpdateView):
     model = Product
     fields = ['name','price','description','image','seller_name']
     template_name ='myapp/update_product.html'
+    context_object_name = 'p'
     success_url = reverse_lazy('myapp:products')
 
 
@@ -101,6 +103,18 @@ def delete_product(request,id):
     return render(request,'myapp/update_product.html',context=context)
 
 class ProductDelete(DeleteView):
-    model = product
+    model = Product
     template_name = 'myapp/delete_product.html'
     success_url = reverse_lazy('myapp:products')
+
+def add_to_cart(request,id):
+    p = Product.objects.get(id=id)
+    user=request.user
+    product = Product.objects.get(id=id)
+    Cart(user=user,product=product).save()
+    return render(request,'myapp/add_product.html')
+
+def show_cart(request):
+    user = request.user
+    cart = Cart.objects.filter(user=user)
+    return render(request,'app/addtocart.html',locals())
